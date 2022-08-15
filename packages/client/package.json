@@ -1,0 +1,29 @@
+{
+  "name": "client",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "SEE LICENSE IN LICENSE",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "next -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000"
+  },
+  "dependencies": {
+    "next": "~12.2.5",
+    "react": "~18.2.0",
+    "react-dom": "~18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "~18.7.3",
+    "@types/react": "~18.0.17",
+    "@types/react-dom": "~18.0.6",
+    "@typescript-eslint/eslint-plugin": "~5.33.0",
+    "@typescript-eslint/parser": "~5.33.0",
+    "typescript": "~4.7.4",
+    "eslint": "~8.22.0",
+    "eslint-config-next": "~12.2.5"
+  }
+}
