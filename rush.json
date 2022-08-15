@@ -475,11 +475,11 @@
     // }
 
     {
-      "packageName": "client",
+      "packageName": "blog-client",
       "projectFolder": "packages/client"
     },
     {
-      "packageName": "server",
+      "packageName": "blog-server",
       "projectFolder": "packages/server"
     }
   ]

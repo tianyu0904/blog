@@ -1,9 +1,9 @@
 {
-  "name": "server",
+  "name": "blog-server",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
-  "author": "",
+  "author": "Gao Tianyu",
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
