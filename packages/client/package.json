@@ -5,9 +5,10 @@
   "main": "index.js",
   "author": "Gao Tianyu",
   "license": "SEE LICENSE IN LICENSE",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "next -p 3000",
+    "dev": "next",
     "build": "next build",
     "start": "next start -p 3000"
   },
@@ -22,8 +23,8 @@
     "@types/react-dom": "~18.0.6",
     "@typescript-eslint/eslint-plugin": "~5.33.0",
     "@typescript-eslint/parser": "~5.33.0",
-    "typescript": "~4.7.4",
     "eslint": "~8.22.0",
-    "eslint-config-next": "~12.2.5"
+    "eslint-config-next": "~12.2.5",
+    "typescript": "~4.7.4"
   }
 }
