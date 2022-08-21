@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-18 14:47:54
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-19 03:02:01
+ * @LastEditTime : 2022-08-22 00:57:19
  * @FilePath     : /blog/packages/server/src/config.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -16,6 +16,8 @@ import { DataSourceOptions, DataSource } from 'typeorm';
 
 type Config = {
   database: DataSourceOptions;
+  port: number;
+  jwtSecret: string;
 };
 
 const config: Config = {
@@ -32,6 +34,8 @@ const config: Config = {
     logging: false,
     cache: { type: 'database', tableName: 'a_cache_table' },
   },
+  port: 3100,
+  jwtSecret: 'blog',
 };
 
 const initializeConfig = (config) => {

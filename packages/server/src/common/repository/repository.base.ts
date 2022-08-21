@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-19 14:56:30
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-21 01:52:14
+ * @LastEditTime : 2022-08-21 11:30:44
  * @FilePath     : /blog/packages/server/src/common/repository/repository.base.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -25,7 +25,6 @@ export class DefaultRepository<TEntity extends entities.DefaultEntity> extends R
       e.updated_at = e.updated_at || dayjs().toDate();
       e.updated_by = e.updated_by || od.uid || 0;
     }
-    console.log(entities);
     await super.save(entities);
     return entities;
   }

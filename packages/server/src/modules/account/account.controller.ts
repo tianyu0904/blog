@@ -2,22 +2,24 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-19 15:48:10
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-20 21:45:04
+ * @LastEditTime : 2022-08-22 01:55:44
  * @FilePath     : /blog/packages/server/src/modules/account/account.controller.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
 
 import {
-  Body,
-  ClassSerializerInterceptor,
   Controller,
-  Put,
-  HttpCode,
-  HttpStatus,
-  UseGuards,
   UseInterceptors,
+  ClassSerializerInterceptor,
+  UseGuards,
+  HttpStatus,
+  HttpCode,
+  Put,
+  Req,
+  Body,
 } from '@nestjs/common';
-import { AccountService, JwtAuthGuard } from './account.service';
+import { JwtAuthGuard } from '../auth/jwt.guard';
+import { AccountService } from './account.service';
 import { AccountEntity } from './account.entity';
 
 @Controller('account')
@@ -31,30 +33,18 @@ export class AccountController {
   @UseInterceptors(ClassSerializerInterceptor)
   @HttpCode(HttpStatus.CREATED)
   async register(@Body() account: Partial<AccountEntity>) {
-    console.log(account);
     const result = await this.accountService.create(account);
     return result;
   }
 
   /**
-   * 用户登录
+   * 修改基本信息
    */
-  @Put('login')
-  @UseInterceptors(ClassSerializerInterceptor)
-  @HttpCode(HttpStatus.OK)
-  async login(@Body() account: Partial<AccountEntity>) {
-    const result = await this.accountService.login(account);
-    return result;
-  }
-
-  /**
-   * 更新信息
-   */
-  @Put('account')
+  @Put('basic')
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.CREATED)
-  async updateAccount(@Body() account: Partial<AccountEntity>) {
+  async updateBasic(@Req() req, @Body() account: Partial<AccountEntity>) {
     return account;
   }
 
@@ -65,7 +55,18 @@ export class AccountController {
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.CREATED)
-  async updatePassword(@Body() account: Partial<AccountEntity>) {
+  async updatePassword(@Req() req, @Body() account: Partial<AccountEntity>) {
+    return account;
+  }
+
+  /**
+   * 修改邮箱
+   */
+  @Put('email')
+  @UseInterceptors(ClassSerializerInterceptor)
+  @UseGuards(JwtAuthGuard)
+  @HttpCode(HttpStatus.CREATED)
+  async updateEmail(@Req() req, @Body() account: Partial<AccountEntity>) {
     return account;
   }
 }
