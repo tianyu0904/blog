@@ -2,17 +2,29 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-16 16:35:29
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-21 00:37:36
+ * @LastEditTime : 2022-08-23 16:45:27
  * @FilePath     : /blog/packages/server/src/common/constants/index.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
 
-import * as User from './user';
+import * as Account from './account';
 import * as Article from './article';
+
+import { AccountEntity } from '../../modules/account/account.entity';
 
 export enum Is {
   No = 0,
   Yes,
+}
+
+export class IOperationContext {
+  _t: number;
+
+  _oid: string;
+
+  _path: string;
+
+  _account: AccountEntity;
 }
 
 export class OD {
@@ -36,6 +48,10 @@ export class OD {
     this._uid = uid;
     this._path = path;
   }
+
+  static from(oc: IOperationContext): OD {
+    return new OD(oc._oid, oc._account && oc._account.id, oc._path);
+  }
 }
 
-export { User, Article };
+export { Account, Article };

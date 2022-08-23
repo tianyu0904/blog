@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-19 03:08:11
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-21 01:49:29
+ * @LastEditTime : 2022-08-23 17:58:08
  * @FilePath     : /blog/packages/server/src/migration/1660849690153-InitAccountEntity.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -18,6 +18,9 @@ export class InitAccountEntity1660849690153 implements MigrationInterface {
     );
     await queryRunner.query(
       `CREATE TABLE \`a_cache_table\` (\`id\` int NOT NULL AUTO_INCREMENT, \`identifier\` varchar(255) NULL, \`time\` bigint NOT NULL, \`duration\` int NOT NULL, \`query\` text NOT NULL, \`result\` text NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`,
+    );
+    await queryRunner.query(
+      `INSERT INTO \`account_entity\` ( \`id\`, \`nickname\`, \`email\`, \`password\`, \`role\`, \`created_at\`, \`created_by\` ) VALUES (100000, "游客账号", "guest@tianyu1994.com", "Guest", -1, "2000-01-01 00:00:00", 0)`,
     );
   }
 

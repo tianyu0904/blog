@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-22 14:07:23
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-22 15:27:02
+ * @LastEditTime : 2022-08-23 18:24:01
  * @FilePath     : /blog/packages/server/src/common/interceptors/transform.interceptor.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -25,12 +25,12 @@ export class TransformInterceptor<T> implements NestInterceptor<T, Response<T>> 
         const response = ctx.getResponse();
         const request = ctx.getRequest();
 
-        const statusCode = response.statusCode;
+        const status = response.statusCode;
         const url = request.originalUrl;
         const res = {
-          statusCode,
-          msg: null,
+          code: status,
           success: true,
+          message: null,
           data,
         };
         logger.request.info(url, res);

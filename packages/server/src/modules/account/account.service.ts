@@ -2,13 +2,14 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-19 14:08:49
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-22 01:07:00
+ * @LastEditTime : 2022-08-23 18:06:03
  * @FilePath     : /blog/packages/server/src/modules/account/account.service.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
 
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { constants } from '../../common';
+import { constants, utils } from '../../common';
+import { AccountRegisterDTO } from './account.dto';
 import { AccountEntity } from './account.entity';
 import { AccountRepository } from './account.repository';
 
@@ -28,16 +29,20 @@ export class AccountService {
     return this.accountRepo.findOneBy({ email });
   }
 
-  public async create(account: Partial<AccountEntity>): Promise<AccountEntity> {
-    const od = new constants.OD();
-    const { nickname } = account;
-    const existAccount = await this.accountRepo.findBy({ nickname });
+  public async create(req: constants.IOperationContext, register: Partial<AccountRegisterDTO>): Promise<AccountEntity> {
+    const od = constants.OD.from(req);
+    const { email, password } = register;
+    const existAccount = await this.accountRepo.findOneBy({ email: email.toLowerCase() });
 
     if (existAccount) {
-      throw new HttpException('用户名已存在', HttpStatus.BAD_REQUEST);
+      throw new HttpException('邮箱已存在', HttpStatus.BAD_REQUEST);
     }
 
-    const newAccount = await this.accountRepo.create(account);
+    const newAccount = await this.accountRepo.create({
+      nickname: '注册用户' + utils.randomString(),
+      email: email.toLowerCase(),
+      password,
+    });
     newAccount.password = await AccountEntity.encryptPassword(newAccount.password);
     await this.accountRepo.saveWithOd(od, newAccount);
     return newAccount;
