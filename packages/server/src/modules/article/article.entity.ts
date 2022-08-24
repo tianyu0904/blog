@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-18 11:13:54
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-21 01:06:18
+ * @LastEditTime : 2022-08-24 14:45:28
  * @FilePath     : /blog/packages/server/src/modules/article/article.entity.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -32,6 +32,9 @@ export class ArticleEntity extends entities.BelongEntity {
   @Column({ type: 'tinyint', comment: '文章类型' })
   type: constants.Article.Type;
 
+  @Column({ type: 'tinyint', comment: '文章状态' })
+  static: constants.Article.Status;
+
   @Column({ type: 'int', default: 0, comment: '阅读量' })
   views: number;
 
@@ -40,6 +43,12 @@ export class ArticleEntity extends entities.BelongEntity {
 
   @Column({ type: 'datetime', nullable: true, comment: '发布时间' })
   publish_at?: Date;
+
+  @Column({ type: 'varchar', length: 150, nullable: true, comment: 'IP' })
+  ip?: string;
+
+  @Column({ type: 'int', nullable: true, comment: '原始文章ID' })
+  parent?: number;
 
   @ManyToOne(() => CategoryEntity, (x) => x.articles)
   category: CategoryEntity;

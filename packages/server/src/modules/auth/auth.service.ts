@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-21 23:59:51
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-23 17:59:03
+ * @LastEditTime : 2022-08-24 16:27:59
  * @FilePath     : /blog/packages/server/src/modules/auth/auth.service.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -11,8 +11,8 @@ import * as _ from 'lodash';
 import * as dayjs from 'dayjs';
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { constants } from '../../common';
-import { AuthDTO } from './auth.dto';
+import { constants, utils } from '../../common';
+import { AuthDTO, SendRegisterCodeDTO } from './auth.dto';
 import { AccountEntity } from '../account/account.entity';
 import { AccountService } from '../account/account.service';
 
@@ -44,5 +44,15 @@ export class AuthService {
     const token = await this.createToken(existAccount.id);
     const result = _.assign(existAccount, { token });
     return result;
+  }
+
+  async sendRegisterCode(req: constants.IOperationContext, registerCode: Partial<SendRegisterCodeDTO>) {
+    const { type, email, phone } = registerCode;
+    if (type === constants.MessageMode.email && email) {
+      const code = utils.randomNumber();
+
+      return true;
+    }
+    throw new HttpException('验证码发送失败', HttpStatus.BAD_REQUEST);
   }
 }

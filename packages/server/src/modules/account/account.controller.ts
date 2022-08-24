@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-19 15:48:10
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-23 17:11:34
+ * @LastEditTime : 2022-08-24 15:39:18
  * @FilePath     : /blog/packages/server/src/modules/account/account.controller.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -32,7 +32,7 @@ export class AccountController {
   @Put('register')
   @Public()
   @HttpCode(HttpStatus.CREATED)
-  async register(@Req() req: constants.IOperationContext, @Body() register: AccountRegisterDTO) {
+  async register(@Req() req: constants.IOperationContext, @Body() register: Partial<AccountRegisterDTO>) {
     const result = await this.accountService.create(req, register);
     return result;
   }
