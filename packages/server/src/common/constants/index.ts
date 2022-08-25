@@ -2,25 +2,20 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-16 16:35:29
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-24 15:15:20
+ * @LastEditTime : 2022-08-25 22:54:35
  * @FilePath     : /blog/packages/server/src/common/constants/index.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
 
 import * as Account from './account';
 import * as Article from './article';
-import * as Mail from './mail';
+import * as MailTemplate from './mail';
 
 import { AccountEntity } from '../../modules/account/account.entity';
 
 export enum Is {
   No = 0,
   Yes,
-}
-
-export enum MessageMode {
-  email = 0,
-  phone,
 }
 
 export class IOperationContext {
@@ -60,4 +55,7 @@ export class OD {
   }
 }
 
-export { Account, Article, Mail };
+export { Account, Article, MailTemplate };
+
+export * from './code';
+export * from './redis';

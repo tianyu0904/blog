@@ -2,15 +2,16 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-22 14:21:31
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-23 16:27:09
+ * @LastEditTime : 2022-08-25 15:27:23
  * @FilePath     : /blog/packages/server/src/common/pipes/validation.pipe.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
 
 import * as logger from '../logger';
-import { Injectable, PipeTransform, ArgumentMetadata, BadRequestException } from '@nestjs/common';
+import { Injectable, PipeTransform, ArgumentMetadata, HttpException } from '@nestjs/common';
 import { validate } from 'class-validator';
 import { plainToClass } from 'class-transformer';
+import { constants } from '../index';
 
 @Injectable()
 export class ValidationPipe implements PipeTransform {
@@ -26,7 +27,7 @@ export class ValidationPipe implements PipeTransform {
       // 只需要取第一个错误信息并返回即可
       const msg = Object.values(errors[0].constraints)[0];
       logger.error.error(`Validation failed: ${msg}`);
-      throw new BadRequestException(`Validation failed: ${msg}`);
+      throw new HttpException(msg, constants.Code.InvalidInput);
     }
     return value;
   }

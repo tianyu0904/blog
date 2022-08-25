@@ -2,14 +2,15 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-21 23:58:38
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-23 16:45:11
+ * @LastEditTime : 2022-08-25 15:24:09
  * @FilePath     : /blog/packages/server/src/modules/auth/auth.guard.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
 
-import { Injectable, ExecutionContext, UnauthorizedException } from '@nestjs/common';
+import { Injectable, ExecutionContext, HttpException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
+import { constants } from '../../common';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
@@ -28,7 +29,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 
   handleRequest(err, account) {
     if (err || !account) {
-      throw new UnauthorizedException('Token验证失败');
+      throw new HttpException('Token验证失败', constants.Code.TokenError);
     }
     return account;
   }

@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-22 00:13:44
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-24 16:28:07
+ * @LastEditTime : 2022-08-25 22:52:34
  * @FilePath     : /blog/packages/server/src/modules/auth/auth.controller.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -10,38 +10,54 @@
 import { Controller, HttpStatus, HttpCode, Get, Put, Body, Req } from '@nestjs/common';
 import { Public } from '../../privileges';
 import { constants } from '../../common';
-import { AuthDTO, SendRegisterCodeDTO } from './auth.dto';
+import { NormalAuthDTO, PhoneAuthDto, PhoneCodeDTO } from './auth.dto';
 import { AuthService } from './auth.service';
 
-@Controller()
+@Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Get()
-  @HttpCode(HttpStatus.OK)
-  async test() {
-    return 'success';
-  }
-
   /**
-   * 用户登录
+   * 游客登录
    */
-  @Put('auth')
+  @Get('guest')
   @Public()
   @HttpCode(HttpStatus.OK)
-  async login(@Req() req: constants.IOperationContext, @Body() auth: Partial<AuthDTO>) {
-    const result = await this.authService.login(req, auth);
+  async loginGuest() {
+    const result = await this.authService.loginGuest();
     return result;
   }
 
   /**
-   * 发送注册验证码
+   * 邮箱密码登录
    */
-  @Put('auth/code')
+  @Put('normal')
   @Public()
   @HttpCode(HttpStatus.OK)
-  async sendRegisterCode(@Req() req: constants.IOperationContext, @Body() registerCode: Partial<SendRegisterCodeDTO>) {
-    const result = await this.sendRegisterCode(req, registerCode);
+  async loginNormal(@Req() req: constants.IOperationContext, @Body() normalAuth: NormalAuthDTO) {
+    const result = await this.authService.loginNormal(req, normalAuth);
+    return result;
+  }
+
+  /**
+   * 手机短信登录
+   */
+  @Put('phone')
+  @Public()
+  @HttpCode(HttpStatus.OK)
+  async loginPhone(@Req() req: constants.IOperationContext, @Body() phoneAuth: PhoneAuthDto) {
+    const result = await this.authService.loginPhone(req, phoneAuth);
+    return result;
+  }
+
+  /**
+   * 发送手机短信
+   */
+  @Put('code')
+  @Public()
+  @HttpCode(HttpStatus.OK)
+  async phoneCode(@Req() req: constants.IOperationContext, @Body() phoneCode: PhoneCodeDTO) {
+    const result = await this.authService.phoneCode(req, phoneCode);
     return result;
   }
 }

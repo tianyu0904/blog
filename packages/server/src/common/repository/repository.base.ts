@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-19 14:56:30
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-21 11:30:44
+ * @LastEditTime : 2022-08-25 18:17:40
  * @FilePath     : /blog/packages/server/src/common/repository/repository.base.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -10,7 +10,7 @@
 import * as _ from 'lodash';
 import * as dayjs from 'dayjs';
 import { Repository, EntityTarget, EntityManager } from 'typeorm';
-import { constants, entities } from '../../common';
+import { constants, entities } from '../index';
 
 export class DefaultRepository<TEntity extends entities.DefaultEntity> extends Repository<TEntity> {
   constructor(target: EntityTarget<TEntity>, manager: EntityManager) {

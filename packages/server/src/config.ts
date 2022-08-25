@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-18 14:47:54
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-24 16:16:51
+ * @LastEditTime : 2022-08-25 13:48:50
  * @FilePath     : /blog/packages/server/src/config.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -52,6 +52,7 @@ const config: Config = {
     host: '127.0.0.1',
     port: 6379,
     password: 'redis123456',
+    keyPrefix: 'BLOG:',
   },
   mail: {
     host: 'smtp.qq.com',

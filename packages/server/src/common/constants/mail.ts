@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-24 01:41:10
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-24 15:07:56
+ * @LastEditTime : 2022-08-25 22:59:39
  * @FilePath     : /blog/packages/server/src/common/constants/mail.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -26,8 +26,10 @@ const getCreateTemplate = (code: string) => {
         <strong style="color: #3acbff;font-size: 24px;">
           ${code}
         </strong>
-        <span>(为了保障您帐号的安全性,请在30分钟内完成验证,祝您生活愉快!)</span>
-        </p>
+      </p>
+      <p style="color: #dde2e2;padding-left: 14px;">
+        <span>(为了保障您帐号的安全性,请在5分钟内完成验证,祝您生活愉快!)</span>
+      </p>
       <p style="padding-left: 20px;">
         <span>快速访问:</span>
         <a href="${blogUrl}" style="color:#fff" target="_blank" rel="noopener noreferrer">${blogUrl}</a>
