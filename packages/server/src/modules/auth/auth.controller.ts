@@ -2,12 +2,12 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-22 00:13:44
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-25 22:52:34
+ * @LastEditTime : 2022-08-26 23:01:28
  * @FilePath     : /blog/packages/server/src/modules/auth/auth.controller.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
 
-import { Controller, HttpStatus, HttpCode, Get, Put, Body, Req } from '@nestjs/common';
+import { Controller, HttpStatus, HttpCode, Get, Post, Body, Req } from '@nestjs/common';
 import { Public } from '../../privileges';
 import { constants } from '../../common';
 import { NormalAuthDTO, PhoneAuthDto, PhoneCodeDTO } from './auth.dto';
@@ -31,7 +31,7 @@ export class AuthController {
   /**
    * 邮箱密码登录
    */
-  @Put('normal')
+  @Post('normal')
   @Public()
   @HttpCode(HttpStatus.OK)
   async loginNormal(@Req() req: constants.IOperationContext, @Body() normalAuth: NormalAuthDTO) {
@@ -42,7 +42,7 @@ export class AuthController {
   /**
    * 手机短信登录
    */
-  @Put('phone')
+  @Post('phone')
   @Public()
   @HttpCode(HttpStatus.OK)
   async loginPhone(@Req() req: constants.IOperationContext, @Body() phoneAuth: PhoneAuthDto) {
@@ -53,7 +53,7 @@ export class AuthController {
   /**
    * 发送手机短信
    */
-  @Put('code')
+  @Post('code')
   @Public()
   @HttpCode(HttpStatus.OK)
   async phoneCode(@Req() req: constants.IOperationContext, @Body() phoneCode: PhoneCodeDTO) {

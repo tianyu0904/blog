@@ -2,12 +2,12 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-19 15:48:10
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-25 22:51:37
+ * @LastEditTime : 2022-08-26 23:00:43
  * @FilePath     : /blog/packages/server/src/modules/account/account.controller.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
 
-import { Controller, HttpStatus, HttpCode, Put, Req, Body } from '@nestjs/common';
+import { Controller, HttpStatus, HttpCode, Post, Req, Body } from '@nestjs/common';
 import { Public } from '../../privileges';
 import { constants } from '../../common';
 import { RegisterDTO, RegisterCodeDTO } from './account.dto';
@@ -20,7 +20,7 @@ export class AccountController {
   /**
    * 发送注册验证码
    */
-  @Put('register/code')
+  @Post('register/code')
   @Public()
   @HttpCode(HttpStatus.OK)
   async registerCode(@Req() req: constants.IOperationContext, @Body() registerCode: RegisterCodeDTO) {
@@ -31,7 +31,7 @@ export class AccountController {
   /**
    * 用户注册
    */
-  @Put('register/create')
+  @Post('register/create')
   @Public()
   @HttpCode(HttpStatus.CREATED)
   async registerCreate(@Req() req: constants.IOperationContext, @Body() register: RegisterDTO) {

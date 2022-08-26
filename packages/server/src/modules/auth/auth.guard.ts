@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-21 23:58:38
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-25 15:24:09
+ * @LastEditTime : 2022-08-26 12:31:30
  * @FilePath     : /blog/packages/server/src/modules/auth/auth.guard.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -27,9 +27,13 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     return request;
   }
 
-  handleRequest(err, account) {
+  handleRequest(err, account, info, context: ExecutionContext) {
     if (err || !account) {
       throw new HttpException('Token验证失败', constants.Code.TokenError);
+    }
+    const isAdmin = !!this.reflector.getAllAndOverride('isAdmin', [context.getHandler()]);
+    if (isAdmin && account.roll !== constants.Account.Role.Admin) {
+      throw new HttpException('没有权限访问', constants.Code.PermissionDend);
     }
     return account;
   }

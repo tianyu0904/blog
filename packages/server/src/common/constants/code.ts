@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-25 14:36:52
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-25 21:48:55
+ * @LastEditTime : 2022-08-26 13:40:49
  * @FilePath     : /blog/packages/server/src/common/constants/code.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -28,4 +28,9 @@ export const enum Code {
   PhoneExist = 200104,
   AccountExist = 200105,
   CodeError = 200106,
+  PermissionDend = 200107,
+
+  // 文章模块
+  CategoryExist = 200201,
+  TagExist = 200202,
 }

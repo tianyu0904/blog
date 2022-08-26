@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-18 11:13:54
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-24 14:45:28
+ * @LastEditTime : 2022-08-26 14:26:48
  * @FilePath     : /blog/packages/server/src/modules/article/article.entity.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -13,7 +13,7 @@ import { CategoryEntity } from '../category/category.entity';
 import { TagEntity } from '../tag/tag.entity';
 
 @Entity()
-export class ArticleEntity extends entities.BelongEntity {
+export class ArticleEntity extends entities.DefaultEntity {
   @Column({ type: 'varchar', length: 50, comment: '标题' })
   title: string;
 
