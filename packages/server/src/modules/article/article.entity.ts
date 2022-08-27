@@ -2,12 +2,12 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-18 11:13:54
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-26 14:26:48
+ * @LastEditTime : 2022-08-28 02:36:27
  * @FilePath     : /blog/packages/server/src/modules/article/article.entity.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
 
-import { Entity, Column, JoinColumn, ManyToOne, ManyToMany } from 'typeorm';
+import { Entity, Column, ManyToOne, ManyToMany, JoinTable, RelationId } from 'typeorm';
 import { constants, entities } from '../../common';
 import { CategoryEntity } from '../category/category.entity';
 import { TagEntity } from '../tag/tag.entity';
@@ -21,19 +21,22 @@ export class ArticleEntity extends entities.DefaultEntity {
   summary: string;
 
   @Column({ type: 'mediumtext', comment: '原始内容' })
-  context: string;
+  content: string;
 
   @Column({ type: 'mediumtext', comment: '格式化内容' })
   html: string;
 
-  @Column({ type: 'text', comment: '格式化内容索引' })
-  toc: string;
+  @Column({ type: 'json', comment: '文章目录' })
+  catalogue: constants.Article.Catalogue[];
 
   @Column({ type: 'tinyint', comment: '文章类型' })
   type: constants.Article.Type;
 
   @Column({ type: 'tinyint', comment: '文章状态' })
   static: constants.Article.Status;
+
+  @Column({ type: 'tinyint', comment: '是否置顶' })
+  istop: constants.Is;
 
   @Column({ type: 'int', default: 0, comment: '阅读量' })
   views: number;
@@ -52,10 +55,10 @@ export class ArticleEntity extends entities.DefaultEntity {
 
   @ManyToOne(() => CategoryEntity, (x) => x.articles)
   category: CategoryEntity;
-  @Column({ comment: '分类ID' })
+  @RelationId((x: ArticleEntity) => x.category)
   categoryId: number;
 
   @ManyToMany(() => TagEntity, (x) => x.articles)
-  @JoinColumn()
+  @JoinTable({ name: 'article_tag_relation' })
   tags: TagEntity[];
 }

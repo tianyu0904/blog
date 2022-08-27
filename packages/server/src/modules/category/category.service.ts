@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-26 01:42:35
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-26 14:40:47
+ * @LastEditTime : 2022-08-27 00:58:48
  * @FilePath     : /blog/packages/server/src/modules/category/category.service.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -16,6 +16,10 @@ import { CategoryRepository } from './category.repository';
 export class CategoryService {
   constructor(private readonly categoryRepo: CategoryRepository) {}
 
+  async findOneById(id: number) {
+    return this.categoryRepo.findOneBy({ id });
+  }
+
   public async create(req: constants.IOperationContext, category: Partial<CategoryDTO>) {
     const od = constants.OD.from(req);
     const { name } = category;
@@ -27,7 +31,7 @@ export class CategoryService {
 
     const newCategory = await this.categoryRepo.create({ name, belong: od.uid });
 
-    await this.categoryRepo.saveWithOd(od, newCategory);
-    return newCategory;
+    const result = await this.categoryRepo.saveWithOd(od, newCategory);
+    return result;
   }
 }

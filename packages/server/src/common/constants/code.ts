@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-25 14:36:52
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-26 13:40:49
+ * @LastEditTime : 2022-08-27 00:33:01
  * @FilePath     : /blog/packages/server/src/common/constants/code.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -33,4 +33,5 @@ export const enum Code {
   // 文章模块
   CategoryExist = 200201,
   TagExist = 200202,
+  ArticleExist = 200203,
 }

@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-26 01:42:45
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-26 18:10:53
+ * @LastEditTime : 2022-08-27 00:59:00
  * @FilePath     : /blog/packages/server/src/modules/tag/tag.service.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -17,6 +17,10 @@ import { TagRepository } from './tag.repository';
 export class TagService {
   constructor(private readonly tagRepo: TagRepository) {}
 
+  async findByIds(ids: number[]) {
+    return this.tagRepo.findByIds(ids);
+  }
+
   public async create(req: constants.IOperationContext, tag: Partial<TagDTO>) {
     const od = constants.OD.from(req);
     const { name } = tag;
@@ -29,7 +33,7 @@ export class TagService {
     const color = constants.Color_12[_.random(11)];
     const newTag = await this.tagRepo.create({ name, color });
 
-    await this.tagRepo.saveWithOd(od, newTag);
-    return newTag;
+    const result = await this.tagRepo.saveWithOd(od, newTag);
+    return result;
   }
 }

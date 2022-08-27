@@ -2,12 +2,13 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-26 01:44:17
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-26 23:01:47
+ * @LastEditTime : 2022-08-28 00:26:41
  * @FilePath     : /blog/packages/server/src/modules/category/category.controller.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
 
 import { Controller, HttpCode, HttpStatus, Post, Req, Body } from '@nestjs/common';
+import { Writer } from '../../privileges';
 import { constants } from '../../common';
 import { CategoryDTO } from './category.dto';
 import { CategoryService } from './category.service';
@@ -20,6 +21,7 @@ export class CategoryController {
    * 添加分类
    */
   @Post()
+  @Writer()
   @HttpCode(HttpStatus.OK)
   async create(@Req() req: constants.IOperationContext, @Body() category: CategoryDTO) {
     return this.categoryService.create(req, category);

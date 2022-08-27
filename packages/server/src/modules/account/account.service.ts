@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-19 14:08:49
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-25 22:55:59
+ * @LastEditTime : 2022-08-27 23:10:14
  * @FilePath     : /blog/packages/server/src/modules/account/account.service.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -46,7 +46,7 @@ export class AccountService {
     const redisKey = constants.RedisPrefix.createAccountPIN + email;
     await utils.RedisClient.setex(redisKey, 5 * 60, code);
     const { title, context } = constants.MailTemplate.getCreateTemplate(code);
-    utils.Mail.sendMail([email], title, context);
+    utils.MailService.sendMail([email], title, context);
     return true;
   }
 

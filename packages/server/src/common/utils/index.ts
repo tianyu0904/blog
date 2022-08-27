@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-23 15:02:06
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-24 16:14:05
+ * @LastEditTime : 2022-08-27 00:46:52
  * @FilePath     : /blog/packages/server/src/common/utils/index.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -44,3 +44,4 @@ export const randomNumber = (count = 6) => {
 
 export * from './mailer';
 export * from './redis';
+export * from './markdown';
