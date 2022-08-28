@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-26 22:52:23
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-28 00:34:26
+ * @LastEditTime : 2022-08-28 16:35:46
  * @FilePath     : /blog/packages/server/src/modules/article/article.dto.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -29,4 +29,16 @@ export class ArticleDTO {
   @IsNotEmpty({ message: '文章类型不能为空' })
   @IsEnum(constants.Article.Type, { message: '文章类型不存在' })
   readonly type: constants.Article.Type;
+}
+
+export class IndexDTO {
+  readonly pi: number;
+
+  readonly ps: number;
+
+  readonly keyword: string;
+
+  readonly author: number;
+
+  readonly tags: number[];
 }

@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-26 01:31:23
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-28 01:58:36
+ * @LastEditTime : 2022-08-28 18:07:14
  * @FilePath     : /blog/packages/server/src/modules/article/article.service.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -10,7 +10,7 @@
 import * as _ from 'lodash';
 import { Injectable, HttpException } from '@nestjs/common';
 import { constants, utils } from '../../common';
-import { ArticleDTO } from './article.dto';
+import { ArticleDTO, IndexDTO } from './article.dto';
 import { ArticleRepository } from './article.repository';
 import { CategoryService } from '../category/category.service';
 import { TagService } from '../tag/tag.service';
@@ -56,13 +56,37 @@ export class ArticleService {
       html,
       catalogue,
       type,
-      static: type === constants.Article.Type.Public ? StatusEnum.Pending : StatusEnum.Waiting,
+      status: type === constants.Article.Type.Public ? StatusEnum.Pending : StatusEnum.Waiting,
       istop: constants.Is.No,
       category,
       tags,
     });
 
     const result = await this.articleRepo.saveWithOd(od, newArticle);
+    return result;
+  }
+
+  public async index(req: constants.IOperationContext, index: Partial<IndexDTO>) {
+    const { pi = 0, ps = 20 } = index;
+
+    const [articles, count] = await this.articleRepo.findAndCount({
+      take: ps,
+      skip: pi * ps,
+      relations: ['category', 'tags'],
+      where: {
+        type: constants.Article.Type.Public,
+        status: constants.Article.Status.Approve,
+      },
+    });
+
+    const result = {
+      pi,
+      ps,
+      pc: count ? Math.ceil(count / ps) : 0,
+      count,
+      value: articles,
+    };
+
     return result;
   }
 }

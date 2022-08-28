@@ -33,7 +33,7 @@ export class ArticleEntity extends entities.DefaultEntity {
   type: constants.Article.Type;
 
   @Column({ type: 'tinyint', comment: '文章状态' })
-  static: constants.Article.Status;
+  status: constants.Article.Status;
 
   @Column({ type: 'tinyint', comment: '是否置顶' })
   istop: constants.Is;
