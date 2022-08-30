@@ -2,7 +2,7 @@
  * @Author       : Gao Tianyu tianyu8125@163.com
  * @Date         : 2022-08-26 22:52:23
  * @LastEditors  : Gao Tianyu tianyu8125@163.com
- * @LastEditTime : 2022-08-28 16:35:46
+ * @LastEditTime : 2022-08-30 21:45:35
  * @FilePath     : /blog/packages/server/src/modules/article/article.dto.ts
  * Copyright (c) <2022> <Gao Tianyu>, All Rights Reserved.
  */
@@ -10,7 +10,7 @@
 import { IsNotEmpty, IsNumber, IsEnum, IsArray, Length } from 'class-validator';
 import { constants } from '../../common';
 
-export class ArticleDTO {
+export class CreateBodyDTO {
   @IsNotEmpty({ message: '标题不能为空' })
   @Length(1, 50, { message: '标题长度限制为50个字符' })
   readonly title: string;
@@ -31,7 +31,7 @@ export class ArticleDTO {
   readonly type: constants.Article.Type;
 }
 
-export class IndexDTO {
+export class IndexQueryDTO {
   readonly pi: number;
 
   readonly ps: number;
@@ -41,4 +41,9 @@ export class IndexDTO {
   readonly author: number;
 
   readonly tags: number[];
+}
+
+export class DetailParamDto {
+  @IsNotEmpty({ message: '文章ID不能为空' })
+  readonly articleId: string;
 }
