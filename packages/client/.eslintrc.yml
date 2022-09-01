@@ -1,1 +1,5 @@
+env:
+  es2021: true
+  node: true
+  browser: true
 extends: "next/core-web-vitals"
